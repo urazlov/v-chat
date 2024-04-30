@@ -52,8 +52,11 @@
     "@nx/angular:application": {
       "e2eTestRunner": "none",
       "linter": "eslint",
-      "style": "scss",
+      "style": "less",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "style": "less"
     }
   },
   "nxCloudAccessToken": "OGMzNjlhMGEtZjIzYS00YTlmLTgxMWUtMjRjYjQ1MWE1NmVlfHJlYWQtd3JpdGU=",
@@ -73,5 +76,8 @@
         "extensions": ["ts", "tsx", "js", "jsx", "html", "vue"]
       }
     }
-  ]
+  ],
+  "affected": {
+    "defaultBase": "master"
+  }
 }

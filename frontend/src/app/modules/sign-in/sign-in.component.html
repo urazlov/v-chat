@@ -1,0 +1,91 @@
+@if (isLoggedIn$ | async) {
+<mat-card class="login_form__card">
+  <mat-card-content class="login_form__card-content">
+    <mat-card-header>
+      <mat-card-title class="login_form__title">
+        You are already loggined!
+      </mat-card-title>
+    </mat-card-header>
+    <a mat-button routerLink="/" color="basic">Go back to the chat</a>
+  </mat-card-content>
+</mat-card>
+} @else {
+<mat-card class="login_form__card">
+  <mat-card-content class="login_form__card-content">
+    <mat-card-header>
+      <mat-card-title class="login_form__title">Registration</mat-card-title>
+    </mat-card-header>
+    <form
+      [formGroup]="form"
+      id="signIn"
+      class="login-form"
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field class="login-form__field">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          [errorStateMatcher]="errorState"
+          placeholder="Ex. pat@example.com"
+        />
+        @if (emailControl.hasError('email') &&
+        !emailControl.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+        } @if (emailControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="login-form__field">
+        <mat-label>Login</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="login"
+          [errorStateMatcher]="errorState"
+        />
+        @if (loginControl.hasError('required')) {
+        <mat-error>Login is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="login-form__field">
+        <mat-label>Name</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="name"
+          [errorStateMatcher]="errorState"
+        />
+        @if (nameControl.hasError('required')) {
+        <mat-error>Name is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="login-form__field">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          [errorStateMatcher]="errorState"
+        />
+        @if (emailControl.hasError('password') &&
+        !emailControl.hasError('required')) {
+        <mat-error>Please enter a password</mat-error>
+        } @if (emailControl.hasError('minLength')) {
+        <mat-error>Min length is<strong>6</strong></mat-error>
+        }
+      </mat-form-field>
+    </form>
+    <button
+      mat-raised-button
+      class="login-form__button"
+      color="basic"
+      type="submit"
+      form="signIn"
+    >
+      Complete
+    </button>
+  </mat-card-content>
+</mat-card>
+}
