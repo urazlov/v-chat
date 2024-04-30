@@ -1,23 +1,23 @@
 {
-  "name": "v-chat",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "frontend",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/v-chat/src",
+  "sourceRoot": "frontend/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/v-chat",
-        "index": "apps/v-chat/src/index.html",
-        "browser": "apps/v-chat/src/main.ts",
+        "outputPath": "dist/frontend",
+        "index": "frontend/src/index.html",
+        "main": "frontend/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/v-chat/tsconfig.app.json",
+        "tsConfig": "frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/v-chat/src/favicon.ico", "apps/v-chat/src/assets"],
-        "styles": ["apps/v-chat/src/styles.scss"],
+        "assets": ["frontend/src/favicon.ico", "frontend/src/assets"],
+        "styles": ["frontend/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -37,9 +37,12 @@
           "outputHashing": "all"
         },
         "development": {
+          "buildOptimizer": false,
           "optimization": false,
+          "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
@@ -48,10 +51,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "v-chat:build:production"
+          "buildTarget": "frontend:build:production"
         },
         "development": {
-          "buildTarget": "v-chat:build:development"
+          "buildTarget": "frontend:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -59,18 +62,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "v-chat:build"
+        "buildTarget": "frontend:build"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/v-chat/jest.config.ts"
-      }
     }
   }
 }

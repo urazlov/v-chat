@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: v-chat-database
+      POSTGRES_USER: v-chat-user
+      POSTGRES_PASSWORD: v-chat-password
+    ports:
+      - '5432:5432'
+    volumes:
+      - mydbdata:/var/lib/postgresql/data
+volumes:
+  mydbdata:
