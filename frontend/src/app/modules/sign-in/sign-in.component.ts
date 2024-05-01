@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, NgZone, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -12,8 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { FormErrorStateMatcher } from '../../validators/validators';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { UserRegistration } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-sign-in',
@@ -32,7 +33,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: '../login/login.component.less',
 })
 export class SignInComponent {
-  authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly zone = inject(NgZone);
 
   readonly isLoggedIn$ = this.authService.isLoggedIn();
 
@@ -69,7 +72,12 @@ export class SignInComponent {
   onSubmit(): void {
     if (this.form.invalid) return;
 
-    const userData = this.form.value;
-    console.log(userData);
+    const userData = this.form.value as UserRegistration;
+
+    this.authService.registration(userData).subscribe(() => {
+      this.zone.run(() => {
+        this.router.navigateByUrl('/login');
+      });
+    });
   }
 }

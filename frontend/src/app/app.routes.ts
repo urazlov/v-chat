@@ -7,5 +7,10 @@ import { SignInComponent } from './modules/sign-in/sign-in.component';
 export const appRoutes: Route[] = [
   { path: 'login', component: LoginComponent },
   { path: 'sign-in', component: SignInComponent },
-  { path: '', component: MainComponent, canActivate: [canActivate] },
+  {
+    path: '',
+    component: MainComponent,
+    canActivate: [canActivate],
+    pathMatch: 'full',
+  },
 ];

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, NgZone, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -12,8 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { FormErrorStateMatcher } from '../../validators/validators';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { UserLogin } from '../../interfaces/user.interface';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +34,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.component.less',
 })
 export class LoginComponent {
-  authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly zone = inject(NgZone);
 
   readonly isLoggedIn$ = this.authService.isLoggedIn();
 
@@ -57,10 +61,19 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    console.log(this.form);
     if (this.form.invalid) return;
 
-    const userData = this.form.value;
-    console.log(userData);
+    const userData = this.form.value as UserLogin;
+
+    this.authService
+      .login(userData)
+      .pipe(
+        tap((data) => localStorage.setItem('accessToken', data.accessToken))
+      )
+      .subscribe(() =>
+        this.zone.run(() => {
+          this.router.navigateByUrl('/');
+        })
+      );
   }
 }
