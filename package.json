@@ -5,6 +5,7 @@
   "scripts": {
     "start:back": "nx serve backend -c development",
     "start:front": "nx serve frontend -c development",
+    "migrations": "psql -U v-chat-user -h localhost -d v-chat-database -f ./migrations/data.sql",
     "nx:cache": "npx nx reset",
     "format": "npx nx format:write"
   },
