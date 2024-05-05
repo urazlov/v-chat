@@ -7,4 +7,4 @@ Fullstack chat application
 - Run `docker-compose up -d` to start postgres in docker.
 - Run `npm run start:back` to start backend the development server.
 - Run `npm run start:front` to start the frontend development server. Happy coding!
-- Run `npm run migrations` to load initial data to data-base
+- Run `npm run migrations` to load initial data to database
