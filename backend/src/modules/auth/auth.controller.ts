@@ -1,7 +1,16 @@
-import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UnauthorizedException,
+  Get,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { JwtAuthGuard } from '../guard/auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -59,5 +68,11 @@ export class AuthController {
     const accessToken = this.jwtService.sign(payload);
 
     return { accessToken };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  async getProfile(@Req() req) {
+    return req.user;
   }
 }

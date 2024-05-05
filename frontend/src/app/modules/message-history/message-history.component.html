@@ -1,0 +1,18 @@
+<div class="message-history">
+  <ul *ngIf="messages.length; else noMessagesTemplate">
+    @for(message of messages; track message) {
+    <li
+      [class.sent]="message.senderId === currentUserId"
+      [class.received]="message.senderId !== currentUserId"
+    >
+      <div class="message-content">
+        {{ message.content }}
+        <div class="timestamp">{{ message.timestamp | date : 'short' }}</div>
+      </div>
+    </li>
+    }
+  </ul>
+  <ng-template #noMessagesTemplate>
+    <p>No messages yet.</p>
+  </ng-template>
+</div>
