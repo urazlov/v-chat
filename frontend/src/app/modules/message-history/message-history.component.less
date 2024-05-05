@@ -1,0 +1,40 @@
+.message-history {
+  height: 500px;
+  overflow: scroll;
+}
+
+.message-history ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-history li {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.message-content {
+  padding: 5px 10px;
+  border-radius: 15px;
+  max-width: 70%;
+  overflow-wrap: break-word;
+}
+
+.sent .message-content {
+  margin-left: auto;
+  background-color: #dcf8c6;
+}
+
+.received .message-content {
+  margin-right: auto;
+  background-color: #ececec;
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  color: gray;
+  text-align: right;
+}
