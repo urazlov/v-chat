@@ -1,66 +1,73 @@
-@if (isLoggedIn$ | async) {
-<mat-card class="login_form__card">
-  <mat-card-content class="login_form__card-content">
-    <mat-card-header>
-      <mat-card-title class="login_form__title">
-        You are already loggined!
-      </mat-card-title>
-    </mat-card-header>
-    <a mat-button routerLink="/" color="basic">Go back to the chat</a>
-  </mat-card-content>
-</mat-card>
-} @else {
-<mat-card class="login_form__card">
-  <mat-card-content class="login_form__card-content">
-    <mat-card-header>
-      <mat-card-title class="login_form__title"
-        >Welcome to V-CHAT</mat-card-title
-      >
-    </mat-card-header>
-    <form
-      [formGroup]="form"
-      id="login"
-      class="login-form"
-      (ngSubmit)="onSubmit()"
-    >
-      <mat-form-field class="login-form__field">
-        <mat-label>Login</mat-label>
-        <input
-          type="text"
-          matInput
-          formControlName="login"
-          [errorStateMatcher]="errorState"
-        />
-        @if (loginControl.hasError('required')) {
-        <mat-error>Login is <strong>required</strong></mat-error>
-        }
-      </mat-form-field>
-      <mat-form-field class="login-form__field">
-        <mat-label>Password</mat-label>
-        <input
-          type="password"
-          matInput
-          formControlName="password"
-          [errorStateMatcher]="errorState"
-        />
-        @if (passwordControl.hasError('required')) {
-        <mat-error>Please enter a password</mat-error>
-        } @if (passwordControl.hasError('minlength')) {
-        <mat-error>Min lenght is <strong>6</strong></mat-error>
-        }
-      </mat-form-field>
-    </form>
-    <button
-      mat-raised-button
-      class="login-form__button"
-      type="submit"
-      form="login"
-    >
-      Login
-    </button>
-    <a mat-button routerLink="/sign-in" color="basic"
-      >Don't have account? Sing in</a
-    >
-  </mat-card-content>
-</mat-card>
-}
+<div class="ring">
+  <i style="--clr: #42aaff"></i>
+  <i style="--clr: #0095b6"></i>
+  <i style="--clr: #003153"></i>
+  <div class="login">
+    @if (isLoggedIn$ | async) {
+
+    <mat-card class="login_form__card">
+      <mat-card-content class="login_form__card-content">
+        <mat-card-header>
+          <mat-card-title class="login_form__title">
+            You are already loggined!
+          </mat-card-title>
+        </mat-card-header>
+        <a mat-button routerLink="/" color="basic">Go back to the chat</a>
+      </mat-card-content>
+    </mat-card>
+    } @else {
+    <mat-card class="login_form__card">
+      <mat-card-content class="login_form__card-content">
+        <mat-card-header>
+          <mat-card-title class="login_form__title">LOGIN</mat-card-title>
+        </mat-card-header>
+        <form
+          [formGroup]="form"
+          id="login"
+          class="login-form"
+          (ngSubmit)="onSubmit()"
+        >
+          <mat-form-field class="login-form__field">
+            <mat-label>Login</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="login"
+              [errorStateMatcher]="errorState"
+            />
+            @if (loginControl.hasError('required')) {
+            <mat-error>Login is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="login-form__field">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              [errorStateMatcher]="errorState"
+            />
+            @if (passwordControl.hasError('required')) {
+            <mat-error>Please enter a password</mat-error>
+            } @if (passwordControl.hasError('minlength')) {
+            <mat-error>Min lenght is <strong>6</strong></mat-error>
+            }
+          </mat-form-field>
+        </form>
+        <button
+          mat-raised-button
+          class="login-form__button"
+          type="submit"
+          form="login"
+        >
+          Login
+        </button>
+        <a mat-button routerLink="/sign-in" color="basic"
+          >Don't have account? Sing in</a
+        >
+      </mat-card-content>
+    </mat-card>
+    }
+    <div></div>
+  </div>
+</div>
